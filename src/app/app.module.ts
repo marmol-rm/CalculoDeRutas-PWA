@@ -4,10 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { VistaMapaComponent } from './vista-mapa/vista-mapa.component';
+import { VistaLoginComponent } from './vista-login/vista-login.component';
+import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VistaMapaComponent,
+    VistaLoginComponent,
+    VistaRegUsuarioComponent
   ],
   imports: [
     BrowserModule,
