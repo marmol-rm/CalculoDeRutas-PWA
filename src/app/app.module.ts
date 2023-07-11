@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { VistaMapaComponent } from './vista-mapa/vista-mapa.component';
 import { VistaLoginComponent } from './vista-login/vista-login.component';
 import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

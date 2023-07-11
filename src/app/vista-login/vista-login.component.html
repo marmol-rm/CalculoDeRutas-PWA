@@ -1,1 +1,22 @@
-<p>vista-login works!</p>
+<h3>vista-login works!</h3>
+<div class="card-container">
+  <form (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-group">
+      <label for="username">Usuario: </label>
+      <br>
+      <input type="text" id="username" [(ngModel)]="username" name="user" required>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="password">Contraseña: </label>
+      <br>
+      <input type="password" id="password" [(ngModel)]="password" name="pass" required>
+    </div>
+    <br>
+    <button type="submit" class="card card-small"><span>Ingresar</span></button>
+  </form>
+</div>
+<footer>
+  Aún no tiene una cuenta?&nbsp;
+  <a href="" target="_blank" rel="noopener">Registrese</a>
+</footer>

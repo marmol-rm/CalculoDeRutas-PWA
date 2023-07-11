@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VistaLoginComponent implements OnInit {
 
+  username: string | undefined;
+  password: string | undefined;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    console.log('Username:', this.username);
+    console.log('Password:', this.password);
+
+    this.username = '';
+    this.password = '';
   }
 
 }
