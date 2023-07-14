@@ -6,9 +6,8 @@ var iconRetinaUrl = 'assets/marker-icon-2x.png';
 var iconUrl = 'assets/marker-icon.png';
 var shadowUrl = 'assets/marker-shadow.png';
 var destination : string;
-var map: L.Map;
+//var map: L.Map;
 var localMarker: L.Marker;
-var marker : L.Marker;
 
 @Component({
   selector: 'app-vista-mapa',
@@ -21,17 +20,18 @@ export class VistaMapaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setMap();
+    this.setMap()
   }
 
   private setMap(): void {
-    navigator.geolocation.watchPosition(exito, error);
+    navigator.geolocation.getCurrentPosition(exito, error)
 
     function exito(pos: { coords: { latitude: number; longitude: number; accuracy: number; }; }) {
       console.log(pos);
-      const ltt = pos.coords.latitude;
-      const lgt = pos.coords.longitude;
-      const acu = pos.coords.accuracy;
+      var ltt = pos.coords.latitude
+      var lgt = pos.coords.longitude
+      var acu = pos.coords.accuracy
+      var marker: L.Marker
 
       const iconDefault = L.icon({
         iconRetinaUrl,
@@ -42,60 +42,49 @@ export class VistaMapaComponent implements OnInit {
         popupAnchor: [1, -34],
         tooltipAnchor: [16, -28],
         shadowSize: [41, 41]
-      });
-      L.Marker.prototype.options.icon = iconDefault;
+      })
 
-      if(map == null) map = L.map('map').setView([ltt, lgt], 16);
+      L.Marker.prototype.options.icon = iconDefault
 
-      /*localMarker = L.marker([ltt, lgt], {draggable : false}).addTo(map);
-      localMarker.bindPopup('Usted está aquí', {autoPan : false});
-      localMarker.setLatLng([ltt, lgt]);*/
+      var map = L.map('map').setView([ltt, lgt], 16)
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '<b>&copy;OpenStreetMap | Sistema de Cálculo de Rutas</b>'
-      }).addTo(map);
+      }).addTo(map)
 
-      if(localMarker != null) map.removeLayer(localMarker);
-      localMarker = L.marker([ltt, lgt], {draggable : false}).addTo(map);
-      localMarker.bindPopup('Usted está aquí', {keepInView : true});
-      localMarker.setLatLng([ltt, lgt]);
+      if(localMarker) map.removeLayer(localMarker)
+      localMarker = L.marker([ltt, lgt], {draggable : false}).addTo(map)
+      localMarker.bindPopup('Usted está aquí', {keepInView : true})
 
-      map.on('click', function (e) {
-        marker = L.marker(e.latlng, {draggable : false}).addTo(map);
-        map.off('click'); // Deshabilitamos la adicion de más marcadores
-        map.removeLayer(marker);
+      map.on('dblclick', function (e) {
+        var marker = L.marker(e.latlng, {draggable: false, interactive: false}).addTo(map)
+        if (marker) map.removeLayer(marker)
+        map.off('dblclick') // Deshabilitamos la adicion de más marcadores
 
         L.Routing.control({
-          waypoints: [
-            L.latLng(localMarker.getLatLng()),
-            L.latLng(e.latlng.lat, e.latlng.lng)
-          ], addWaypoints : false, waypointMode : "snap"
-        }).on('routesfound', function (e) {
-          console.log(e);
-          e.routes[0].coordinates.forEach(function (coord:any, index:number) {
-            //setTimeout(() => {
-            //  localMarker.setLatLng([coord.lat, coord.lng]);
-            //}, index*500);
-          })
+          addWaypoints: false
+        }).setWaypoints([
+          L.latLng([ltt, lgt]),
+          L.latLng(e.latlng.lat, e.latlng.lng)])
+          .on('routesfound', function (e:any) {
+            console.log(e)
 
-          if(e.routes[0].name != null) {
-            destination = e.routes[0].name;
-          }
-          if(e.routes[0].summary.totalDistance < 10) {
-            alert("Ha llegado a su destino: " + destination);
-            //map.removeLayer(marker);
-            //map.removeLayer(localMarker);
-            map = map.remove();
-            map = L.map('map').setView([ltt, lgt], 16);
-            alert("Se han guardado los datos de su viaje.");
-          }
-        }).addTo(map);
-      });
+            if (e.routes[0].name != null) {
+              destination = e.routes[0].name;
+            }
+            if (e.routes[0].summary.totalDistance < 10) {
+              alert("Ha llegado a su destino: " + destination);
+              map = map.remove()
+              alert("Se han guardado los datos de su viaje.");
+              navigator.geolocation.getCurrentPosition(exito, error)
+            }
+          }).addTo(map)
+      })
     }
 
     function error() {
-      alert("Por favor habilite el acceso a la ubicación para continuar.");
+      alert("Por favor habilite el acceso a la ubicación para continuar.")
     }
   }
 }
