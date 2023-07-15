@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
+import {Ruta} from "../classes/ruta";
+import {VistaMapaService} from "../service/vista-mapa.service";
 
-var iconRetinaUrl = 'assets/marker-icon-2x.png';
-var iconUrl = 'assets/marker-icon.png';
+var iconRetinaUrl = './assets/pointer.png';
+var iconUrl =  './assets/pointer.png';
 var shadowUrl = 'assets/marker-shadow.png';
 var destination : string;
-//var map: L.Map;
 var localMarker: L.Marker;
+var ruta : Ruta;
 
 @Component({
   selector: 'app-vista-mapa',
@@ -15,8 +17,10 @@ var localMarker: L.Marker;
   styleUrls: ['./vista-mapa.component.css']
 })
 export class VistaMapaComponent implements OnInit {
+  private service: VistaMapaService;
 
-  constructor() {
+  constructor(s : VistaMapaService) {
+    this.service = s
   }
 
   ngOnInit(): void {
@@ -26,27 +30,40 @@ export class VistaMapaComponent implements OnInit {
   private setMap(): void {
     navigator.geolocation.getCurrentPosition(exito, error)
 
-    function exito(pos: { coords: { latitude: number; longitude: number; accuracy: number; }; }) {
-      console.log(pos);
+    const s = this.service;
+    function saveRoute(r : Ruta) {
+      r.horaFin = new Date()
+      console.log(r)
+      // Se guarda la ruta recorrida
+      if(r) {
+       s.guardaRuta(r).subscribe();
+      }
+    }
+
+    function exito(this: any, pos: { coords: { latitude: number; longitude: number; accuracy: number; }; } ) {
+      console.log(pos)
       var ltt = pos.coords.latitude
       var lgt = pos.coords.longitude
       var acu = pos.coords.accuracy
       var marker: L.Marker
+      ruta = new Ruta();
 
       const iconDefault = L.icon({
         iconRetinaUrl,
         iconUrl,
         shadowUrl,
-        iconSize: [25, 42],
+        iconSize: [35, 34],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         tooltipAnchor: [16, -28],
         shadowSize: [41, 41]
       })
 
+      ruta.usuEmail = "mr14015@email.com"
+
       L.Marker.prototype.options.icon = iconDefault
 
-      var map = L.map('map').setView([ltt, lgt], 16)
+      var map = L.map('map').setView([ltt, lgt], 16);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -54,28 +71,50 @@ export class VistaMapaComponent implements OnInit {
       }).addTo(map)
 
       if(localMarker) map.removeLayer(localMarker)
-      localMarker = L.marker([ltt, lgt], {draggable : false}).addTo(map)
-      localMarker.bindPopup('Usted está aquí', {keepInView : true})
+      localMarker = L.marker([ltt, lgt], {
+        draggable : false,
+        title : 'Ubicación actual'})
+        .bindPopup('Usted está aquí')
+        .addTo(map)
 
-      map.on('dblclick', function (e) {
-        var marker = L.marker(e.latlng, {draggable: false, interactive: false}).addTo(map)
+      map.on('click', function (e) {
+        var marker = L.marker(e.latlng, {
+          draggable: false,
+          interactive: false})
+          .addTo(map)
+
+        if(!ruta.horaInicio)
+            ruta.horaInicio = new Date()
+        if(!ruta.coordPartida)
+          ruta.coordPartida = [ltt, lgt].toString()
+        if(!ruta.coordDestino)
+          ruta.coordDestino = [e.latlng.lat, e.latlng.lng].toString()
+
         if (marker) map.removeLayer(marker)
-        map.off('dblclick') // Deshabilitamos la adicion de más marcadores
+        map.off('click') // Deshabilitamos la adicion de más marcadores
 
         L.Routing.control({
           addWaypoints: false
         }).setWaypoints([
           L.latLng([ltt, lgt]),
-          L.latLng(e.latlng.lat, e.latlng.lng)])
-          .on('routesfound', function (e:any) {
+          L.latLng([e.latlng.lat, e.latlng.lng])])
+          .on('routesfound', (e: any) => {
             console.log(e)
 
+            if(!ruta.distanciaTotal)
+              ruta.distanciaTotal = e.routes[0].summary.totalDistance
+
             if (e.routes[0].name != null) {
-              destination = e.routes[0].name;
+              destination = e.routes[0].name
+              ruta.ubiDestino = destination
+              if(!ruta.ubiPartida)
+                ruta.ubiPartida = e.routes[0].name
             }
+
             if (e.routes[0].summary.totalDistance < 10) {
               alert("Ha llegado a su destino: " + destination);
               map = map.remove()
+              saveRoute(ruta)
               alert("Se han guardado los datos de su viaje.");
               navigator.geolocation.getCurrentPosition(exito, error)
             }

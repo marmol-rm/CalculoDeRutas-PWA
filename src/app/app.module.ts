@@ -8,6 +8,7 @@ import { VistaMapaComponent } from './vista-mapa/vista-mapa.component';
 import { VistaLoginComponent } from './vista-login/vista-login.component';
 import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.component';
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {FormsModule} from "@angular/forms";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
