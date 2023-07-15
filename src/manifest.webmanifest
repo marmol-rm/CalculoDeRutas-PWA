@@ -1,6 +1,6 @@
 {
   "name": "CalculoDeRutas-PWA",
-  "short_name": "CalculoDeRutasWA",
+  "short_name": "CalculoDeRutasPWA",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
