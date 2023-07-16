@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import {Ruta} from "../classes/ruta";
-import {VistaMapaService} from "../service/vista-mapa.service";
+import {CdrService} from "../service/cdr.service";
 
 var iconRetinaUrl = './assets/pointer.png';
 var iconUrl =  './assets/pointer.png';
@@ -11,15 +11,16 @@ var destination : string;
 var localMarker: L.Marker;
 var ruta : Ruta;
 
+
 @Component({
   selector: 'app-vista-mapa',
   templateUrl: './vista-mapa.component.html',
   styleUrls: ['./vista-mapa.component.css']
 })
 export class VistaMapaComponent implements OnInit {
-  private service: VistaMapaService;
+  private service: CdrService;
 
-  constructor(s : VistaMapaService) {
+  constructor(s : CdrService) {
     this.service = s
   }
 
@@ -59,7 +60,7 @@ export class VistaMapaComponent implements OnInit {
         shadowSize: [41, 41]
       })
 
-      ruta.usuEmail = "mr14015@email.com"
+      ruta.usuEmail = "mr14015@ues.edu.sv"
 
       L.Marker.prototype.options.icon = iconDefault
 

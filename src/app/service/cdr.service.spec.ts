@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VistaUsuarioService } from './vista-usuario.service';
+import { CdrService } from './cdr.service';
 
-describe('VistaUsuarioService', () => {
-  let service: VistaUsuarioService;
+describe('CdrService', () => {
+  let service: CdrService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VistaUsuarioService);
+    service = TestBed.inject(CdrService);
   });
 
   it('should be created', () => {

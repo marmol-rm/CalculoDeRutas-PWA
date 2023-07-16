@@ -9,13 +9,16 @@ import { VistaLoginComponent } from './vista-login/vista-login.component';
 import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { AppRoutingModule } from './app-routing.module';
+import { VistaUbicacionesReportComponent } from './vista-ubicaciones-report/vista-ubicaciones-report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VistaMapaComponent,
     VistaLoginComponent,
-    VistaRegUsuarioComponent
+    VistaRegUsuarioComponent,
+    VistaUbicacionesReportComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import {HttpClientModule} from "@angular/common/http";
       registrationStrategy: 'registerWhenStable:30000'
     }),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

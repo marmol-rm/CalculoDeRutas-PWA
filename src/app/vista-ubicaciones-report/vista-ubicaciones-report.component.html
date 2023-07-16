@@ -1,0 +1,21 @@
+<div class="container">
+  <table>
+    <thead>
+    <tr>
+      <th>Ubicaciones visitadas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr></tr>
+    <tr *ngFor="let u of ubicaciones">
+      <td>- {{u.ubiNombre}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+
+  <button class="card card-small">
+    <span><a class="text" href="http://10.0.2.2:4200/map">Regresar</a></span>
+  </button>
+</div>
