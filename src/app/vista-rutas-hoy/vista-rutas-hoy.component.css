@@ -1,7 +1,9 @@
 table {
   border-color: #c2c3c4;
   border-style: solid;
-  font-size: 120%;
+  font-size: 90%;
+  border-inline: #1976d2;
+  column-width: max-content;
 }
 
 .container{

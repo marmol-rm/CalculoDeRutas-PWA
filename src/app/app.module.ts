@@ -11,6 +11,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { VistaUbicacionesReportComponent } from './vista-ubicaciones-report/vista-ubicaciones-report.component';
+import { VistaRutasHoyComponent } from './vista-rutas-hoy/vista-rutas-hoy.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VistaUbicacionesReportComponent } from './vista-ubicaciones-report/vist
     VistaMapaComponent,
     VistaLoginComponent,
     VistaRegUsuarioComponent,
-    VistaUbicacionesReportComponent
+    VistaUbicacionesReportComponent,
+    VistaRutasHoyComponent
   ],
   imports: [
     BrowserModule,

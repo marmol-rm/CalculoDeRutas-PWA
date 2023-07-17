@@ -1,4 +1,4 @@
-<div class="container">
+<div class="card-container">
   <table>
     <thead>
     <tr>
@@ -8,14 +8,15 @@
     <tbody>
     <tr></tr>
     <tr *ngFor="let u of ubicaciones">
-      <td>- {{u.ubiNombre}}</td>
+      <ol>{{u.ubiNombre}}</ol>
     </tr>
     </tbody>
     <tfoot>
     </tfoot>
   </table>
-
-  <button class="card card-small">
+  <br>
+  <button class="card">
     <span><a class="text" href="http://10.0.2.2:4200/map">Regresar</a></span>
   </button>
+  <br><br><br><br>
 </div>

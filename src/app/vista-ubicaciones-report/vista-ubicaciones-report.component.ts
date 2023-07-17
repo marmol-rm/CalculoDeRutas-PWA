@@ -16,7 +16,7 @@ export class VistaUbicacionesReportComponent implements OnInit {
     this.getUbiaciones("mr14015@ues.edu.sv");
   }
   private getUbiaciones(email : string) {
-    this.service.listaRutasEmail(email).subscribe(data => {
+    this.service.listaUbiEmail(email).subscribe(data => {
       this.ubicaciones = data;
     })
   }

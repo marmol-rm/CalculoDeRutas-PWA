@@ -1,0 +1,32 @@
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Punto de partida</th>
+      <th>Destino</th>
+      <th>Inicio</th>
+      <th>Fin</th>
+      <th>Total<br>recorrido</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr></tr>
+    <tr *ngFor="let r of rutas">
+      <td>{{r.rutFecha}}</td>
+      <td>{{r.rutUbiPartida.ubiNombre}}</td>
+      <td>{{r.rutUbiDestino.ubiNombre}}</td>
+      <td>{{r.rutHoraInicio.split("T")[1].substr(0,5)}}</td>
+      <td>{{r.rutHoraFin.split("T")[1].substr(0,5)}}</td>
+      <td>{{r.rutDistancia}} Metros</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+  <br>
+  <button class="card">
+    <span><a class="text" href="http://10.0.2.2:4200/map">Regresar</a></span>
+  </button>
+  <br><br><br><br>
+</div>

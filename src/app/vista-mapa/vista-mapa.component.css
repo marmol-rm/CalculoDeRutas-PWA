@@ -1,6 +1,23 @@
+#titulo {
+  font-size: 140%;
+  padding-right: 50px;
+}
+
+#rutas-rep {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 95%;
+}
+
+#viajes-rep {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 95%;
+}
+
 .map-container {
   position: absolute;
-  top: 6%;
+  top: 7%;
   left: 0;
   right: 0;
   bottom: 0;
