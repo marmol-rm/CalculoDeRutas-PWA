@@ -20,7 +20,7 @@ const routes : Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes, {
-      useHash: false,
+      useHash: true,
       onSameUrlNavigation : "reload" })
   ],
   exports : [RouterModule]
