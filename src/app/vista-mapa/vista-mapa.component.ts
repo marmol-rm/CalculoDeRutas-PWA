@@ -116,6 +116,9 @@ export class VistaMapaComponent implements OnInit {
             if(!ruta.distanciaTotal)
               ruta.distanciaTotal = e.routes[0].summary.totalDistance
 
+            if(!ruta.tiempoTotal)
+              ruta.tiempoTotal = e.routes[0].summary.totalTime
+
             if (e.routes[0].name != null) {
               destination = e.routes[0].name
               ruta.ubiDestino = destination

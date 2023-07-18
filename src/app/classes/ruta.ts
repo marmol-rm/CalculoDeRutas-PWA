@@ -8,6 +8,7 @@ export class Ruta {
   rutGuardada : boolean;
   fecha : string;
   distanciaTotal: number;
+  tiempoTotal: number;
   tipo : string;
   usuEmail : string;
 }

@@ -11,6 +11,7 @@ export class RutaMain {
   rutFecha: string;
   rutDistancia: number;
   rutTipo: string;
+  rutTiempoTotal : number;
   rutUbiPartida: Ubicacion;
   rutUbiDestino: Ubicacion;
   rutUsuId: Usuario;
