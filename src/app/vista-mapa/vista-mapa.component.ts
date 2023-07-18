@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import {Ruta} from "../classes/ruta";
 import {CdrService} from "../service/cdr.service";
+import {Router} from "@angular/router";
 
 var iconRetinaUrl = './assets/pointer.png';
 var iconUrl =  './assets/pointer.png';
@@ -19,19 +20,29 @@ var ruta : Ruta;
 })
 export class VistaMapaComponent implements OnInit {
   private service: CdrService;
+  host : string;
 
-  constructor(s : CdrService) {
-    this.service = s
+  constructor(private s : CdrService, private router : Router) {
+    this.service = s;
   }
 
   ngOnInit(): void {
     this.setMap()
   }
 
+  redirectUbi() {
+    this.router.navigate(['/ubi'])
+  }
+
+  redirectRut() {
+    this.router.navigate(['/today'])
+  }
+
   private setMap(): void {
     navigator.geolocation.getCurrentPosition(exito, error)
 
     const s = this.service;
+    const email = "mr14015@ues.edu.sv";
     function saveRoute(r : Ruta) {
       r.horaFin = new Date()
       console.log(r)
@@ -60,7 +71,7 @@ export class VistaMapaComponent implements OnInit {
         shadowSize: [41, 41]
       })
 
-      ruta.usuEmail = "mr14015@ues.edu.sv"
+      ruta.usuEmail = email;
 
       L.Marker.prototype.options.icon = iconDefault
 
