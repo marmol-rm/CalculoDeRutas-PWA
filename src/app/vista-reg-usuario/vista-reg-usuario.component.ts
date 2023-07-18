@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Usuario} from "../classes/usuario";
+import {CdrService} from "../service/cdr.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-vista-reg-usuario',
@@ -7,25 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VistaRegUsuarioComponent implements OnInit {
 
-  username: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
+  usuario : Usuario;
 
-  constructor() { }
+  constructor(private service : CdrService, private router : Router) { }
 
   ngOnInit(): void {
-    this.username = '';
-    this.email = '';
-    this.password = '';
+    this.usuario = new Usuario();
   }
 
   onSubmit(): void {
-    console.log('Username:', this.username);
-    console.log(('Email'), this.email);
-    console.log('Password:', this.password);
-
-    this.username = '';
-    this.email = '';
-    this.password = '';
+    this.service.guardaUsuario(this.usuario).subscribe()
+    if(this.usuario.usuEmail && this.usuario.usuUsername && this.usuario.usuPassword) {
+      this.usuario = new Usuario()
+      this.router.navigate(['/login'])
+    }
+    this.usuario = new Usuario()
   }
 }
