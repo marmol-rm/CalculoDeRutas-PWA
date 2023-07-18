@@ -12,6 +12,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { VistaUbicacionesReportComponent } from './vista-ubicaciones-report/vista-ubicaciones-report.component';
 import { VistaRutasHoyComponent } from './vista-rutas-hoy/vista-rutas-hoy.component';
+import { RouterModule, Routes } from "@angular/router";
+
+const routes: Routes = [
+
+];
 
 @NgModule({
   declarations: [
@@ -24,6 +29,7 @@ import { VistaRutasHoyComponent } from './vista-rutas-hoy/vista-rutas-hoy.compon
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes, { useHash: true }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
