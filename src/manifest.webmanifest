@@ -4,8 +4,8 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "./CalculoDeRutas-PWA/",
-  "start_url": "./CalculoDeRutas-PWA/login",
+  "scope": "./",
+  "start_url": "./login",
   "icons": [
     {
       "src": "assets/pointer.png",
