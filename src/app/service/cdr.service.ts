@@ -18,11 +18,15 @@ export class CdrService {
   private getRutasUrl : string = this.host + "/cdr/get-rutas";
   private getUbiUrl : string = this.host + "/cdr/get-ubi";
 
-  private _email : string;
+  private validUserUrl : string = this.host + "/cdr/val-user";
+
+  _email : string;
 
   constructor(private client : HttpClient) { }
 
-
+  validaUsuario(u : Usuario):Observable<Boolean> {
+    return this.client.post<Boolean>(this.validUserUrl, u);
+  }
 
   guardaUsuario(u : Usuario):Observable<Object> {
     return this.client.post<Usuario>(this.saveUserUrl, u);
@@ -32,19 +36,12 @@ export class CdrService {
     return this.client.post<Ruta>(this.saveRutaUrl, r);
   }
 
-  listaRutasFecha(fecha : string) : Observable<RutaMain[]> {
-    return this.client.get<RutaMain[]>(this.getRutasUrl + '?fecha=' + fecha);
+  listaRutasFecha(fecha : string, email : string) : Observable<RutaMain[]> {
+    return this.client.get<RutaMain[]>(this.getRutasUrl + '?email=' + email + '&fecha=' + fecha);
   }
 
   listaUbiEmail(email : string) : Observable<Ubicacion[]> {
     return this.client.get<Ubicacion[]>(this.getUbiUrl + '?email=' + email);
   }
 
-  getEmail(): string {
-    return this._email;
-  }
-
-  setEmail(value: string) {
-    this._email = value;
-  }
 }

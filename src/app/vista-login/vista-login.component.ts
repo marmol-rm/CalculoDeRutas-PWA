@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdrService} from "../service/cdr.service";
 import {Router} from "@angular/router";
 import {Usuario} from "../classes/usuario";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-vista-login',
@@ -10,15 +11,21 @@ import {Usuario} from "../classes/usuario";
 })
 export class VistaLoginComponent implements OnInit {
 
-  username: string;
-  email : string;
-  password: string;
-
   user : Usuario;
 
-  constructor(private service : CdrService, private router : Router) { }
+  formulario = new FormGroup({
+    email :  new FormControl('',
+      [Validators.required, Validators.email]),
+    pwd : new FormControl('',
+      [Validators.required, Validators.requiredTrue])
+  })
+
+  constructor(
+    private service : CdrService,
+    private router : Router) { }
 
   ngOnInit(): void {
+    this.user = new Usuario();
   }
 
   redirecToReg() {
@@ -26,10 +33,22 @@ export class VistaLoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.service.setEmail(this.email)
-    this.router.navigate(['/map'])
-    this.email = '';
-    this.password = '';
+    this.user.usuEmail = this.formulario.get('email')?.value
+    this.user.usuPassword = this.formulario.get('pwd')?.value
+    this.validateUser()
+  }
+
+  validateUser() {
+    return this.service.validaUsuario(this.user).subscribe(valido => {
+      if(valido) {
+        this.router.navigate(['/map'], {
+          state: {email: this.user.usuEmail}
+        })
+        this.user = new Usuario();
+      } else {
+        alert('Las credenciales no son válidas');
+      }
+    })
   }
 
 }

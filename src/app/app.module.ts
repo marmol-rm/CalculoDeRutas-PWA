@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 import { VistaMapaComponent } from './vista-mapa/vista-mapa.component';
 import { VistaLoginComponent } from './vista-login/vista-login.component';
 import { VistaRegUsuarioComponent } from './vista-reg-usuario/vista-reg-usuario.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { VistaUbicacionesReportComponent } from './vista-ubicaciones-report/vista-ubicaciones-report.component';
@@ -32,6 +32,7 @@ import { VistaRutasHoyComponent } from './vista-rutas-hoy/vista-rutas-hoy.compon
       registrationStrategy: 'registerWhenStable:30000'
     }),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
   ],

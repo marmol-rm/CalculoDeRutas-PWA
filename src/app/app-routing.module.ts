@@ -8,6 +8,7 @@ import {VistaRegUsuarioComponent} from "./vista-reg-usuario/vista-reg-usuario.co
 import {VistaRutasHoyComponent} from "./vista-rutas-hoy/vista-rutas-hoy.component";
 
 const routes : Routes = [
+  {path : '', redirectTo:'/login', pathMatch : "full"},
   {path : 'map', component:VistaMapaComponent},
   {path : 'ubi', component:VistaUbicacionesReportComponent},
   {path : 'today', component:VistaRutasHoyComponent},

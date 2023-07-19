@@ -20,7 +20,6 @@ var ruta : Ruta;
 })
 export class VistaMapaComponent implements OnInit {
   private service: CdrService;
-  host : string;
 
   constructor(private s : CdrService, private router : Router) {
     this.service = s;
@@ -31,18 +30,23 @@ export class VistaMapaComponent implements OnInit {
   }
 
   redirectUbi() {
-    this.router.navigate(['/ubi'])
+    this.router.navigate(['/ubi'], {
+      state : {email : history.state.email}
+    })
   }
 
   redirectRut() {
-    this.router.navigate(['/today'])
+    this.router.navigate(['/today'], {
+      state : {email : history.state.email}
+    })
   }
 
   private setMap(): void {
-    navigator.geolocation.getCurrentPosition(exito, error)
-
     const s = this.service;
-    const email = "mr14015@ues.edu.sv";
+    let email = history.state.email;
+    console.log(email)
+
+    navigator.geolocation.getCurrentPosition(exito, error)
     function saveRoute(r : Ruta) {
       r.horaFin = new Date()
       console.log(r)
@@ -117,7 +121,7 @@ export class VistaMapaComponent implements OnInit {
               ruta.distanciaTotal = e.routes[0].summary.totalDistance
 
             if(!ruta.tiempoTotal)
-              ruta.tiempoTotal = e.routes[0].summary.totalTime
+              ruta.tiempoTotal = e.routes[0].summary.totalTime/60
 
             if (e.routes[0].name != null) {
               destination = e.routes[0].name

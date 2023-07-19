@@ -11,17 +11,21 @@ import {Router} from "@angular/router";
 export class VistaUbicacionesReportComponent implements OnInit {
 
   ubicaciones : Ubicacion[];
+  email : string;
   constructor(private service : CdrService, private router : Router) { }
 
   ngOnInit(): void {
-    this.getUbiaciones("mr14015@ues.edu.sv");
+    this.email = history.state.email;
+    this.getUbicaciones();
   }
 
   redirectMap() {
-    this.router.navigate(['/map'])
+    this.router.navigate(['/map'], {
+      state : {email : history.state.email}
+    })
   }
-  private getUbiaciones(email : string) {
-    this.service.listaUbiEmail(email).subscribe(data => {
+  private getUbicaciones() {
+    this.service.listaUbiEmail(this.email).subscribe(data => {
       this.ubicaciones = data;
     })
   }
