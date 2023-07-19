@@ -11,8 +11,8 @@ import {Usuario} from "../classes/usuario";
 })
 export class CdrService {
 
-  //private host : string = "http://10.0.2.2:8080";
-  private host : string = "http://localhost:8080";
+  private host : string = "http://10.0.2.2:8080";
+  //private host : string = "http://localhost:8080";
   private saveUserUrl : string = this.host + "/cdr/save-user";
   private saveRutaUrl : string = this.host + "/cdr/save-ruta";
   private getRutasUrl : string = this.host + "/cdr/get-rutas";
@@ -20,7 +20,6 @@ export class CdrService {
 
   private validUserUrl : string = this.host + "/cdr/val-user";
 
-  _email : string;
 
   constructor(private client : HttpClient) { }
 

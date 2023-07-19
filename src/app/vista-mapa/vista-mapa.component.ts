@@ -26,7 +26,7 @@ export class VistaMapaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setMap()
+    this.setMap();
   }
 
   redirectUbi() {
@@ -44,15 +44,15 @@ export class VistaMapaComponent implements OnInit {
   private setMap(): void {
     const s = this.service;
     let email = history.state.email;
-    console.log(email)
+    navigator.geolocation.getCurrentPosition(exito, error,
+      {enableHighAccuracy: true, maximumAge: 5000})
 
-    navigator.geolocation.getCurrentPosition(exito, error)
     function saveRoute(r : Ruta) {
-      r.horaFin = new Date()
+      r.horaFin = new Date();
       console.log(r)
       // Se guarda la ruta recorrida
       if(r) {
-       s.guardaRuta(r).subscribe();
+       s.guardaRuta(r).subscribe()
       }
     }
 
@@ -139,6 +139,7 @@ export class VistaMapaComponent implements OnInit {
             }
           }).addTo(map)
       })
+      alert('Se ha cargado el mapa')
     }
 
     function error() {

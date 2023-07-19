@@ -2,7 +2,7 @@
   "name": "Cálculo De Rutas PWA",
   "short_name": "CDR",
   "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "background_color": "lightblue",
   "display": "standalone",
   "scope": "./",
   "start_url": "./login",

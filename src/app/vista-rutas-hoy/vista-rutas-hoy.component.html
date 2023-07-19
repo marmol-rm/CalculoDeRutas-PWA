@@ -3,11 +3,11 @@
     <thead>
     <tr>
       <th>Fecha</th>
-      <th>Punto de partida</th>
+      <th>Punto de<br>partida</th>
       <th>Destino</th>
       <th>Inicio</th>
       <th>Fin</th>
-      <th>Tiempo de<br>viaje</th>
+      <th>Tiempo de<br>viaje (min)</th>
     </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
       <td>{{r.rutUbiDestino.ubiNombre}}</td>
       <td>{{r.rutHoraInicio.split("T")[1].substr(0,5)}}</td>
       <td>{{r.rutHoraFin.split("T")[1].substr(0,5)}}</td>
-      <td>{{r.rutTiempoTotal}}m</td>
+      <td>{{r.rutTiempoTotal}}</td>
     </tr>
     </tbody>
     <tfoot>
