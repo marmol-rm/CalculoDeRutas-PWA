@@ -21,7 +21,7 @@ const routes : Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes, {
-      useHash: true,
+      useHash: false,
       onSameUrlNavigation : "reload" })
   ],
   exports : [RouterModule]
