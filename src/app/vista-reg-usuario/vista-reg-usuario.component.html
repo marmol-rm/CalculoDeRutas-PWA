@@ -4,13 +4,13 @@
     <div class="form-group">
       <label for="username">Usuario: </label>
       <br>
-      <input [required]="true" type="text" id="username" [(ngModel)]="usuario.usuUsername" name="user" maxlength="50">
+      <input type="text" id="username" [(ngModel)]="usuario.usuUsername" name="user" maxlength="50">
     </div>
     <br>
     <div class="form-group">
       <label for="email">Correo personal: </label>
       <br>
-      <input [required]="true" type="email" id="email" [(ngModel)]="usuario.usuEmail" name="pass" required>
+      <input type="email" id="email" [(ngModel)]="usuario.usuEmail" name="pass" required>
     </div>
     <div class="form-group">
       <br>
@@ -19,7 +19,7 @@
       <input [required]="true" required type="password" id="password" [(ngModel)]="usuario.usuPassword" maxlength="50" name="pass" required>
     </div>
     <br>
-    <button type="submit" class="card card-small"><span>Ingresar</span></button>
+    <button type="submit" class="card card-small"><span>Registrarse</span></button>
     <br><br><br><br><br>
   </form>
 </div>

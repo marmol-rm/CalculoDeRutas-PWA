@@ -44,8 +44,8 @@ export class VistaMapaComponent implements OnInit {
   private setMap(): void {
     const s = this.service;
     let email = history.state.email;
-    navigator.geolocation.getCurrentPosition(exito, error,
-      {enableHighAccuracy: true, maximumAge: 5000})
+    navigator.geolocation.watchPosition(exito, error,
+      {enableHighAccuracy: true, maximumAge: 10000})
 
     function saveRoute(r : Ruta) {
       r.horaFin = new Date();
@@ -95,7 +95,7 @@ export class VistaMapaComponent implements OnInit {
 
       map.on('click', function (e) {
         var marker = L.marker(e.latlng, {
-          draggable: false,
+          draggable: false, alt: "Destino",
           interactive: false})
           .addTo(map)
 
@@ -130,16 +130,24 @@ export class VistaMapaComponent implements OnInit {
                 ruta.ubiPartida = e.routes[0].name
             }
 
+            const dif = 0.0003;
+            let latdif = e.routes[0].coordinates[0].lat - ltt;
+            let lngdif = e.routes[0].coordinates[1].lng - lgt;
+            /*
+            console.log(dif)
+            console.log(latdif)
+            console.log(lngdif)*/
+
             if (e.routes[0].summary.totalDistance < 10) {
+            //if(latdif < dif && lngdif < dif) {
               alert("Ha llegado a su destino: " + destination);
               map = map.remove()
               saveRoute(ruta)
               alert("Se han guardado los datos de su viaje.");
-              navigator.geolocation.getCurrentPosition(exito, error)
+              navigator.geolocation.watchPosition(exito, error)
             }
           }).addTo(map)
       })
-      alert('Se ha cargado el mapa')
     }
 
     function error() {
