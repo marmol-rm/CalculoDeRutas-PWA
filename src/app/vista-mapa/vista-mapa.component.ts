@@ -93,7 +93,7 @@ export class VistaMapaComponent implements OnInit {
         .bindPopup('Usted está aquí')
         .addTo(map)
 
-      map.on('click', function (e) {
+      map.on('dblclick', function (e) {
         var marker = L.marker(e.latlng, {
           draggable: false, alt: "Destino",
           interactive: false})
@@ -106,8 +106,8 @@ export class VistaMapaComponent implements OnInit {
         if(!ruta.coordDestino)
           ruta.coordDestino = [e.latlng.lat, e.latlng.lng].toString()
 
-        if (marker) map.removeLayer(marker)
-        map.off('click') // Deshabilitamos la adicion de más marcadores
+        map.removeLayer(marker)
+        map.off('dblclick') // Deshabilitamos la adicion de más marcadores
 
         L.Routing.control({
           addWaypoints: false
@@ -121,9 +121,9 @@ export class VistaMapaComponent implements OnInit {
               ruta.distanciaTotal = e.routes[0].summary.totalDistance
 
             if(!ruta.tiempoTotal)
-              ruta.tiempoTotal = e.routes[0].summary.totalTime/60
+              ruta.tiempoTotal = e.routes[0].summary.totalTime
 
-            if (e.routes[0].name != null) {
+            if (e.routes[0].name != "") {
               destination = e.routes[0].name
               ruta.ubiDestino = destination
               if(!ruta.ubiPartida)
@@ -136,7 +136,8 @@ export class VistaMapaComponent implements OnInit {
             /*
             console.log(dif)
             console.log(latdif)
-            console.log(lngdif)*/
+            console.log(lngdif)
+            */
 
             if (e.routes[0].summary.totalDistance < 10) {
             //if(latdif < dif && lngdif < dif) {
