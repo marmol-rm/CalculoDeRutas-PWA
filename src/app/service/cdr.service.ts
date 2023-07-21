@@ -17,7 +17,6 @@ export class CdrService {
   private saveRutaUrl : string = this.host + "/cdr/save-ruta";
   private getRutasUrl : string = this.host + "/cdr/get-rutas";
   private getUbiUrl : string = this.host + "/cdr/get-ubi";
-
   private validUserUrl : string = this.host + "/cdr/val-user";
 
 
