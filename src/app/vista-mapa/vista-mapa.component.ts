@@ -123,7 +123,7 @@ export class VistaMapaComponent implements OnInit {
             if(!ruta.tiempoTotal)
               ruta.tiempoTotal = e.routes[0].summary.totalTime/60
 
-            if (e.routes[0].name != null) {
+            if (e.routes[0].name != "") {
               destination = e.routes[0].name
               ruta.ubiDestino = destination
               if(!ruta.ubiPartida)
