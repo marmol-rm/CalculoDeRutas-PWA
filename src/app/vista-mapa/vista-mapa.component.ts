@@ -79,7 +79,7 @@ export class VistaMapaComponent implements OnInit {
 
       L.Marker.prototype.options.icon = iconDefault
 
-      var map = L.map('map').setView([ltt, lgt], 16);
+      var map = L.map('map').setView([ltt, lgt], 17);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
