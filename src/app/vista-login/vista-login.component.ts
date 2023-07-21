@@ -35,7 +35,11 @@ export class VistaLoginComponent implements OnInit {
   onSubmit(): void {
     this.user.usuEmail = this.formulario.get('email')?.value
     this.user.usuPassword = this.formulario.get('pwd')?.value
-    this.validateUser()
+    //this.validateUser()
+    this.router.navigate(['/map'], {
+      state: {email: this.user.usuEmail}
+    })
+    this.user = new Usuario();
   }
 
   validateUser() {
