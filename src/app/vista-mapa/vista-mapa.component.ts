@@ -79,7 +79,7 @@ export class VistaMapaComponent implements OnInit {
 
       L.Marker.prototype.options.icon = iconDefault
 
-      var map = L.map('map').setView([ltt, lgt], 16);
+      var map = L.map('map').setView([ltt, lgt], 17);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -93,7 +93,7 @@ export class VistaMapaComponent implements OnInit {
         .bindPopup('Usted está aquí')
         .addTo(map)
 
-      map.on('click', function (e) {
+      map.on('dblclick', function (e) {
         var marker = L.marker(e.latlng, {
           draggable: false, alt: "Destino",
           interactive: false})
@@ -107,7 +107,7 @@ export class VistaMapaComponent implements OnInit {
           ruta.coordDestino = [e.latlng.lat, e.latlng.lng].toString()
 
         if (marker) map.removeLayer(marker)
-        map.off('click') // Deshabilitamos la adicion de más marcadores
+        map.off('dblclick') // Deshabilitamos la adicion de más marcadores
 
         L.Routing.control({
           addWaypoints: false
@@ -138,8 +138,8 @@ export class VistaMapaComponent implements OnInit {
             console.log(latdif)
             console.log(lngdif)*/
 
-            if (e.routes[0].summary.totalDistance < 10) {
-            //if(latdif < dif && lngdif < dif) {
+            //if (e.routes[0].summary.totalDistance < 10) {
+            if(latdif < dif && lngdif < dif) {
               alert("Ha llegado a su destino: " + destination);
               map = map.remove()
               saveRoute(ruta)
